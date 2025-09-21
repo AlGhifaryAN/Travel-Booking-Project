@@ -9,6 +9,8 @@ Proyek ini mendukung autentikasi pengguna dengan **role-based access** (Admin & 
 - Blade Template
 - Composer
 
+---
+
 ## Persiapan & Instalasi
 1. **Clone Repo**
    ```bash
@@ -76,12 +78,3 @@ Selama pengembangan terdapat beberapa kendala utama:
    - Pastikan `.env` dan folder `vendor/` **tidak di-commit**.  
    - Cek `.gitignore` untuk keamanan.
 
----
-
-## Lisensi
-Proyek ini dirilis untuk tujuan pembelajaran. Silakan gunakan dan modifikasi sesuai kebutuhan.
-
----
-
-**Author**  
-Nama: *Al Ghifary Akmal Nasheeri*  
