@@ -3,7 +3,7 @@
 Aplikasi **Travel Booking** berbasis Laravel untuk manajemen pemesanan perjalanan.  
 Proyek ini mendukung autentikasi pengguna dengan **role-based access** (Admin & Passenger) dan fitur pemesanan sederhana.
 
-## 📦 Tech Stack
+## Tech Stack
 - **PHP 8+**, **Laravel 10**
 - MySQL / MariaDB
 - Blade Template
@@ -11,7 +11,7 @@ Proyek ini mendukung autentikasi pengguna dengan **role-based access** (Admin & 
 
 ---
 
-## 🚀 Fitur Utama
+## Fitur Utama
 - **Autentikasi & Role**
   - Login/Logout dengan CSRF protection.
   - Role **Admin** dan **Passenger**.
@@ -23,7 +23,7 @@ Proyek ini mendukung autentikasi pengguna dengan **role-based access** (Admin & 
 
 ---
 
-## ⚙️ Persiapan & Instalasi
+## Persiapan & Instalasi
 1. **Clone Repo**
    ```bash
    git clone https://github.com/<username>/travel-booking.git
@@ -48,7 +48,7 @@ Proyek ini mendukung autentikasi pengguna dengan **role-based access** (Admin & 
 
 ---
 
-## 🔑 Akun Default
+## Akun Default
 Gunakan akun ini untuk login awal:
 
 | Role       | Email                 | Password |
@@ -58,7 +58,7 @@ Gunakan akun ini untuk login awal:
 
 ---
 
-## ▶️ Menjalankan Server
+## Menjalankan Server
 ```bash
 php artisan serve
 ```
@@ -66,7 +66,7 @@ Akses di: **http://127.0.0.1:8000/login**
 
 ---
 
-## 🛠️ Kendala & Catatan Pengembangan
+## Kendala & Catatan Pengembangan
 
 Selama pengembangan terdapat beberapa kendala utama:
 
@@ -92,7 +92,7 @@ Selama pengembangan terdapat beberapa kendala utama:
 
 ---
 
-## 📄 Lisensi
+## Lisensi
 Proyek ini dirilis untuk tujuan pembelajaran. Silakan gunakan dan modifikasi sesuai kebutuhan.
 
 ---
