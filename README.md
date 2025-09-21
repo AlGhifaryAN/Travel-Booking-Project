@@ -1,61 +1,101 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Travel Booking Project
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Aplikasi **Travel Booking** berbasis Laravel untuk manajemen pemesanan perjalanan.  
+Proyek ini mendukung autentikasi pengguna dengan **role-based access** (Admin & Passenger) dan fitur pemesanan sederhana.
 
-## About Laravel
+## 📦 Tech Stack
+- **PHP 8+**, **Laravel 10**
+- MySQL / MariaDB
+- Blade Template
+- Composer
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🚀 Fitur Utama
+- **Autentikasi & Role**
+  - Login/Logout dengan CSRF protection.
+  - Role **Admin** dan **Passenger**.
+  - Middleware `IsAdmin` & `IsPassenger` untuk proteksi halaman.
+- **Manajemen Pemesanan**
+  - Relasi `users` → `bookings` (foreign key).
+- **Seeder**
+  - User seeder dengan akun default (admin & passenger).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## ⚙️ Persiapan & Instalasi
+1. **Clone Repo**
+   ```bash
+   git clone https://github.com/<username>/travel-booking.git
+   cd travel-booking
+   ```
+2. **Install Dependency**
+   ```bash
+   composer install
+   npm install && npm run build   # jika pakai vite/asset
+   ```
+3. **Environment**
+   - Salin `.env.example` → `.env` lalu sesuaikan database.
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
+4. **Database & Seeder**
+   ```bash
+   php artisan migrate
+   php artisan db:seed --class=UserSeeder
+   ```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+---
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## 🔑 Akun Default
+Gunakan akun ini untuk login awal:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+| Role       | Email                 | Password |
+|------------|-----------------------|---------|
+| **Admin**  | admin@example.com     | password |
+| Passenger  | passenger@example.com | password |
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## ▶️ Menjalankan Server
+```bash
+php artisan serve
+```
+Akses di: **http://127.0.0.1:8000/login**
 
-### Premium Partners
+---
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## 🛠️ Kendala & Catatan Pengembangan
 
-## Contributing
+Selama pengembangan terdapat beberapa kendala utama:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+1. **Duplicate Seeder Class**  
+   - Error: `Cannot declare class UserSeeder, because the name is already in use`.  
+   - Penyebab: File `UserSeeder.php` ganda/namespace bentrok.  
+   - Solusi: Pastikan hanya ada **satu** file `UserSeeder` dan composer autoload dijalankan ulang.
 
-## Code of Conduct
+2. **Foreign Key Constraint Saat Truncate**  
+   - Error: `Cannot truncate a table referenced in a foreign key constraint (bookings_user_id_foreign)`.  
+   - Solusi: Disable foreign key check di seeder atau pakai `DB::table('users')->delete();`.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+3. **CSRF Token / Page Expired (419)**  
+   - Muncul saat form login tidak memuat `@csrf`.  
+   - Solusi: Pastikan setiap form POST menyertakan `@csrf`.
 
-## Security Vulnerabilities
+4. **Middleware Role Protection**  
+   - Pastikan middleware (`IsAdmin`, `IsPassenger`, `RoleMiddleware`) terdaftar di `app/Http/Kernel.php` dan digunakan pada route yang sesuai.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+5. **GitHub Deployment**  
+   - Pastikan `.env` dan folder `vendor/` **tidak di-commit**.  
+   - Cek `.gitignore` untuk keamanan.
 
-## License
+---
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 📄 Lisensi
+Proyek ini dirilis untuk tujuan pembelajaran. Silakan gunakan dan modifikasi sesuai kebutuhan.
+
+---
+
+**Author**  
+Nama: *Al Ghifary Akmal Nasheeri*  
