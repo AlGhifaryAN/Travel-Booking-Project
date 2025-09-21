@@ -9,20 +9,6 @@ Proyek ini mendukung autentikasi pengguna dengan **role-based access** (Admin & 
 - Blade Template
 - Composer
 
----
-
-## Fitur Utama
-- **Autentikasi & Role**
-  - Login/Logout dengan CSRF protection.
-  - Role **Admin** dan **Passenger**.
-  - Middleware `IsAdmin` & `IsPassenger` untuk proteksi halaman.
-- **Manajemen Pemesanan**
-  - Relasi `users` → `bookings` (foreign key).
-- **Seeder**
-  - User seeder dengan akun default (admin & passenger).
-
----
-
 ## Persiapan & Instalasi
 1. **Clone Repo**
    ```bash
@@ -53,8 +39,8 @@ Gunakan akun ini untuk login awal:
 
 | Role       | Email                 | Password |
 |------------|-----------------------|---------|
-| **Admin**  | admin@example.com     | password |
-| Passenger  | passenger@example.com | password |
+| **Admin**  | admin@example.com     | 123456 |
+| Passenger  | passenger@example.com | 123456 |
 
 ---
 
